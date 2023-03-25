@@ -1,82 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    public float speed = 5f;
+    public float rotationSpeed = 100f;
 
-   
-        public Rigidbody2D rb;
+    void Update()
+    {
+        // Get the horizontal input axis based on arrow keys or WASD keys
+        float horizontalInput = Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) ? 1f :
+                                 Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) ? -1f : 0f;
 
-        public GameObject upSprite;
-        public GameObject downSprite;
-        public GameObject leftSprite;
-        public GameObject rightSprite;
+        // Calculate the rotation amount based on the input
+        float rotationAmount = horizontalInput * rotationSpeed * Time.deltaTime;
 
-        public float speed = 5f;
+        // Rotate the car sprite around the z-axis
+        transform.Rotate(0f, 0f, rotationAmount);
 
-        void Start()
-        {
-            rb = GetComponent<Rigidbody2D>();
+        // Get the vertical input axis based on arrow keys or WASD keys
+        float verticalInput = Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) ? 1f :
+                               Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) ? -1f : 0f;
 
-            upSprite = transform.Find("Up").gameObject;
-            downSprite = transform.Find("Down").gameObject;
-            leftSprite = transform.Find("Left").gameObject;
-            rightSprite = transform.Find("Right").gameObject;
-        }
+        // Calculate the movement vector
+        Vector2 movement = transform.up * verticalInput * speed * Time.deltaTime;
 
-        void Update()
-        {
-            float horizontal = Input.GetAxisRaw("Horizontal");
-            float vertical = Input.GetAxisRaw("Vertical");
-
-            if (horizontal != 0f || vertical != 0f)
-            {
-                Vector2 movement = new Vector2(horizontal, vertical);
-                rb.velocity = movement.normalized * speed;
-
-                if (horizontal > 0f)
-                {
-                    rightSprite.SetActive(true);
-                    upSprite.SetActive(false);
-                    downSprite.SetActive(false);
-                    leftSprite.SetActive(false);
-                }
-                else if (horizontal < 0f)
-                {
-                    leftSprite.SetActive(true);
-                    upSprite.SetActive(false);
-                    downSprite.SetActive(false);
-                    rightSprite.SetActive(false);
-                }
-
-                if (vertical > 0f)
-                {
-                    upSprite.SetActive(true);
-                    rightSprite.SetActive(false);
-                    downSprite.SetActive(false);
-                    leftSprite.SetActive(false);
-                }
-                else if (vertical < 0f)
-                {
-                    downSprite.SetActive(true);
-                    upSprite.SetActive(false);
-                    rightSprite.SetActive(false);
-                    leftSprite.SetActive(false);
-                }
-            }
-            else
-            {
-                rb.velocity = Vector2.zero;
-            }
-        }
+        // Apply the movement to the car's position
+        transform.position += (Vector3)movement;
     }
-
-
-
-
-
+}
 
 
 
