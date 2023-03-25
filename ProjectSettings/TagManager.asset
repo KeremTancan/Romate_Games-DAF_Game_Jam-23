@@ -44,6 +44,9 @@ TagManager:
   - name: Ground
     uniqueID: 1474273551
     locked: 0
+  - name: Fance
+    uniqueID: 3656340611
+    locked: 0
   - name: Player
     uniqueID: 2998389741
     locked: 0
