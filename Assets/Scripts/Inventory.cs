@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
@@ -9,7 +10,31 @@ public class Inventory : MonoBehaviour
 
     private List<Sprite> inventory = new List<Sprite>();
     private Sprite[,] inventoryGrid = new Sprite[2, 3];
+    //burdan
+    private List<Items> items = new List<Items>();
 
+   
+
+    public bool HasItem(Items item)
+    {
+        return items.Contains(item);
+    }
+
+    public void AddItem(Items item)
+    {
+        items.Add(item);
+    }
+
+    public void RemoveItem(Items item)
+    {
+        items.Remove(item);
+    }
+
+    public List<Items> GetAllItems()
+    {
+        return items;
+    }
+    //buraya
     public void AddToInventory(Sprite item)
     {
         // Check if the inventory is full
