@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UnlemScript : MonoBehaviour
 {
     public int ButonSayisi = 6;
+    
     public Inventory inventory;
     public GameObject Button;
 
@@ -13,7 +15,10 @@ public class UnlemScript : MonoBehaviour
         if (ButonSayisi == 0)
         {
             Button.SetActive(false);
+           
         }
+
+        
     }
     
 }
