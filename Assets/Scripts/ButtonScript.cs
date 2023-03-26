@@ -23,5 +23,11 @@ public class ButtonScript : MonoBehaviour
         inventoryManager.DeleteItem(item);
        
     }
+
+    public void Clear()
+    {
+        inventoryManager.ClearInventory();
+       
+    }
 }
 

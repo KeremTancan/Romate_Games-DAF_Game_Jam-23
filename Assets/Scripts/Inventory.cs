@@ -70,7 +70,19 @@ public class Inventory : MonoBehaviour
         // Item not found in inventory
         Debug.Log("Item not found in inventory!");
     }
+    public void ClearInventory()
+    {
+        // Remove all items from the inventory grid
+        for (int x = 0; x < inventoryGrid.GetLength(0); x++)
+        {
+            for (int y = 0; y < inventoryGrid.GetLength(1); y++)
+            {
+                inventoryGrid[x, y] = null;
+            }
+        }
 
+        UpdateInventoryPanel();
+    }
     private void UpdateInventoryPanel()
     {
         // Clear the inventory panel
