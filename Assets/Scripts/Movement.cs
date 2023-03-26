@@ -5,73 +5,104 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    public UnlemScript Cadir1;
+    public UnlemScript Cadir2;
+    public UnlemScript Cadir3;
+    public UnlemScript Cadir4;
 
-   
-        public Rigidbody2D rb;
+    public Inventory envanter;
 
-        public GameObject upSprite;
-        public GameObject downSprite;
-        public GameObject leftSprite;
-        public GameObject rightSprite;
+    public Rigidbody2D rb;
 
-        public float speed = 5f;
+    public GameObject upSprite;
+    public GameObject downSprite;
+    public GameObject leftSprite;
+    public GameObject rightSprite;
 
-        void Start()
+    public float speed = 5f;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+
+        upSprite = transform.Find("Up").gameObject;
+        downSprite = transform.Find("Down").gameObject;
+        leftSprite = transform.Find("Left").gameObject;
+        rightSprite = transform.Find("Right").gameObject;
+    }
+
+    void Update()
+    {
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+
+        if (horizontal != 0f || vertical != 0f)
         {
-            rb = GetComponent<Rigidbody2D>();
+            Vector2 movement = new Vector2(horizontal, vertical);
+            rb.velocity = movement.normalized * speed;
 
-            upSprite = transform.Find("Up").gameObject;
-            downSprite = transform.Find("Down").gameObject;
-            leftSprite = transform.Find("Left").gameObject;
-            rightSprite = transform.Find("Right").gameObject;
+            if (horizontal > 0f)
+            {
+                rightSprite.SetActive(true);
+                upSprite.SetActive(false);
+                downSprite.SetActive(false);
+                leftSprite.SetActive(false);
+            }
+            else if (horizontal < 0f)
+            {
+                leftSprite.SetActive(true);
+                upSprite.SetActive(false);
+                downSprite.SetActive(false);
+                rightSprite.SetActive(false);
+            }
+
+            if (vertical > 0f)
+            {
+                upSprite.SetActive(true);
+                rightSprite.SetActive(false);
+                downSprite.SetActive(false);
+                leftSprite.SetActive(false);
+            }
+            else if (vertical < 0f)
+            {
+                downSprite.SetActive(true);
+                upSprite.SetActive(false);
+                rightSprite.SetActive(false);
+                leftSprite.SetActive(false);
+            }
         }
-
-        void Update()
+        else
         {
-            float horizontal = Input.GetAxisRaw("Horizontal");
-            float vertical = Input.GetAxisRaw("Vertical");
-
-            if (horizontal != 0f || vertical != 0f)
-            {
-                Vector2 movement = new Vector2(horizontal, vertical);
-                rb.velocity = movement.normalized * speed;
-
-                if (horizontal > 0f)
-                {
-                    rightSprite.SetActive(true);
-                    upSprite.SetActive(false);
-                    downSprite.SetActive(false);
-                    leftSprite.SetActive(false);
-                }
-                else if (horizontal < 0f)
-                {
-                    leftSprite.SetActive(true);
-                    upSprite.SetActive(false);
-                    downSprite.SetActive(false);
-                    rightSprite.SetActive(false);
-                }
-
-                if (vertical > 0f)
-                {
-                    upSprite.SetActive(true);
-                    rightSprite.SetActive(false);
-                    downSprite.SetActive(false);
-                    leftSprite.SetActive(false);
-                }
-                else if (vertical < 0f)
-                {
-                    downSprite.SetActive(true);
-                    upSprite.SetActive(false);
-                    rightSprite.SetActive(false);
-                    leftSprite.SetActive(false);
-                }
-            }
-            else
-            {
-                rb.velocity = Vector2.zero;
-            }
+            rb.velocity = Vector2.zero;
         }
     }
+
+    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "cadir1")
+        {
+            envanter.unlemScript = Cadir1;
+            
+        }
+        if (collision.tag == "cadir2")
+        {
+            envanter.unlemScript = Cadir2;
+            
+        }
+        if (collision.tag == "cadir3")
+        {
+            envanter.unlemScript = Cadir3;
+
+        }
+        if (collision.tag == "cadir4")
+        {
+            envanter.unlemScript = Cadir4;
+
+        }
+
+    }
+}
 
 
 

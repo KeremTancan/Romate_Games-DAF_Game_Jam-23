@@ -7,6 +7,10 @@ public class Inventory : MonoBehaviour
     public GameObject inventoryItemPrefab;
     public GameObject inventoryPanel;
 
+    public UnlemScript unlemScript;
+    
+    
+
     private List<Sprite> inventory = new List<Sprite>();
     private Sprite[,] inventoryGrid = new Sprite[2, 3];
 
@@ -50,7 +54,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void DeleteItem(Sprite item)
+    public bool DeleteItem(Sprite item)
     {
         // Find the item in the inventory grid
         for (int x = 0; x < inventoryGrid.GetLength(0); x++)
@@ -61,15 +65,19 @@ public class Inventory : MonoBehaviour
                 {
                     // Remove the item from the grid
                     inventoryGrid[x, y] = null;
+                    unlemScript.ButonSayisi--;
                     UpdateInventoryPanel();
-                    return;
+                    return true;
                 }
             }
         }
-
-        // Item not found in inventory
+       
         Debug.Log("Item not found in inventory!");
+        return false;
     }
+
+        
+    
     public void ClearInventory()
     {
         // Remove all items from the inventory grid

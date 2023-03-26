@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class ButtonScript : MonoBehaviour
 {
     public Inventory inventoryManager;
-    
-    
+
+   
 
     public void OnButtonClick(Button button)
     {
@@ -20,8 +20,12 @@ public class ButtonScript : MonoBehaviour
     public void OnClick(Button button)
     {
         Sprite item = button.GetComponent<Image>().sprite;
-        inventoryManager.DeleteItem(item);
-       
+        if (inventoryManager.DeleteItem(item))
+        {
+            Destroy(button.gameObject);
+            
+            
+        }
     }
 
     public void Clear()

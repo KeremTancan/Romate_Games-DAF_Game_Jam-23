@@ -8,6 +8,10 @@ TagManager:
   - ekmek
   - tonbaligi
   - corba
+  - cadir1
+  - cadir2
+  - cadir3
+  - cadir4
   layers:
   - Default
   - TransparentFX
