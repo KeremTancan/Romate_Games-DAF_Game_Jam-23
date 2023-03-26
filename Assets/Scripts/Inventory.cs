@@ -26,6 +26,8 @@ public class Inventory : MonoBehaviour
             }
         }
 
+
+
         if (isFull)
         {
             Debug.Log("Inventory is full!");
@@ -46,6 +48,27 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void DeleteItem(Sprite item)
+    {
+        // Find the item in the inventory grid
+        for (int x = 0; x < inventoryGrid.GetLength(0); x++)
+        {
+            for (int y = 0; y < inventoryGrid.GetLength(1); y++)
+            {
+                if (inventoryGrid[x, y] == item)
+                {
+                    // Remove the item from the grid
+                    inventoryGrid[x, y] = null;
+                    UpdateInventoryPanel();
+                    return;
+                }
+            }
+        }
+
+        // Item not found in inventory
+        Debug.Log("Item not found in inventory!");
     }
 
     private void UpdateInventoryPanel()
