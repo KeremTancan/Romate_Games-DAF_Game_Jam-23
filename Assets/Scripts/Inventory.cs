@@ -8,8 +8,7 @@ public class Inventory : MonoBehaviour
     public GameObject inventoryPanel;
 
     public UnlemScript unlemScript;
-    
-    
+
 
     private List<Sprite> inventory = new List<Sprite>();
     private Sprite[,] inventoryGrid = new Sprite[2, 3];
@@ -29,7 +28,6 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
-
 
 
         if (isFull)
@@ -71,13 +69,12 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
-       
+
         Debug.Log("Item not found in inventory!");
         return false;
     }
 
-        
-    
+
     public void ClearInventory()
     {
         // Remove all items from the inventory grid
@@ -91,6 +88,7 @@ public class Inventory : MonoBehaviour
 
         UpdateInventoryPanel();
     }
+
     private void UpdateInventoryPanel()
     {
         // Clear the inventory panel
@@ -109,8 +107,10 @@ public class Inventory : MonoBehaviour
                     GameObject inventoryItem = Instantiate(inventoryItemPrefab, inventoryPanel.transform);
                     inventoryItem.GetComponent<Image>().sprite = inventoryGrid[x, y];
                     RectTransform rectTransform = inventoryItem.GetComponent<RectTransform>();
-                    rectTransform.anchorMin = new Vector2(x / (float)inventoryGrid.GetLength(0), 1 - (y + 1) / (float)inventoryGrid.GetLength(1));
-                    rectTransform.anchorMax = new Vector2((x + 1) / (float)inventoryGrid.GetLength(0), 1 - y / (float)inventoryGrid.GetLength(1));
+                    rectTransform.anchorMin = new Vector2(x / (float)inventoryGrid.GetLength(0),
+                        1 - (y + 1) / (float)inventoryGrid.GetLength(1));
+                    rectTransform.anchorMax = new Vector2((x + 1) / (float)inventoryGrid.GetLength(0),
+                        1 - y / (float)inventoryGrid.GetLength(1));
                     rectTransform.offsetMin = Vector2.zero;
                     rectTransform.offsetMax = Vector2.zero;
                 }
